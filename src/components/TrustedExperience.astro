@@ -1,0 +1,90 @@
+---
+// Trusted Experience section component
+const institutions = [
+  {
+    name: "McLean Hospital",
+    logo: "https://iconsusa.org/assets/icons_copy/McLean_Hospital_logo.svg",
+  },
+  {
+    name: "Siena College",
+    logo: "https://iconsusa.org/assets/icons_copy/siena.svg",
+  },
+  {
+    name: "Boston University",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/3/31/Boston_University_wordmark.svg",
+  },
+];
+---
+
+<section class="section-trust" aria-labelledby="trust-title">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Experience</span>
+      <h2 id="trust-title">Trusted Background</h2>
+    </div>
+
+    <div class="trust-logos">
+      {institutions.map((institution) => (
+        <img
+          src={institution.logo}
+          alt={institution.name}
+          class="trust-logo"
+          loading="lazy"
+        />
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .section-trust {
+    padding: var(--space-24) 0;
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .section-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto var(--space-16);
+  }
+
+  .section-eyebrow {
+    display: block;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--cern-blue);
+    margin-bottom: var(--space-3);
+  }
+
+  .trust-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-12) var(--space-24);
+    opacity: 0.9;
+  }
+
+  .trust-logo {
+    height: 48px;
+    width: auto;
+    filter: grayscale(100%) contrast(0.8);
+    opacity: 0.5;
+    transition: all 0.4s ease;
+    mix-blend-mode: multiply;
+  }
+
+  :global(.dark) .trust-logo {
+    mix-blend-mode: normal;
+    filter: grayscale(100%) brightness(1.5) contrast(0.8);
+  }
+
+  .trust-logo:hover {
+    filter: grayscale(0%) contrast(1);
+    opacity: 1;
+    transform: scale(1.05);
+  }
+</style>

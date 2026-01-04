@@ -1,0 +1,177 @@
+---
+// Core Competencies section component
+const competencies = [
+  {
+    title: "Clinical Insight & Behavioral Analysis",
+    description: "Extensive professional experience in high-stakes roles assessing complex behavioral patterns and human risk factors.",
+    cardClass: "card-1",
+    items: [
+      {
+        title: "Pattern Recognition",
+        text: "Identified behavioral triggers and psychosocial factors to inform strategic interventions.",
+      },
+      {
+        title: "Crisis & Risk Management",
+        text: "Executed crisis response, de-escalation protocols, and strategic safety planning.",
+      },
+      {
+        title: "Structured Interviewing",
+        text: "Conducted individual interviews and facilitated group analysis to identify underlying motivations.",
+      },
+    ],
+  },
+  {
+    title: "Quantitative Analysis & Strategic Insight",
+    description: "Applied data methods for research in clinical and academic contexts.",
+    cardClass: "card-2",
+    items: [
+      {
+        title: "Statistical Programming",
+        text: "Python & SPSS for modeling and hypothesis testing.",
+      },
+      {
+        title: "Data Interpretation",
+        text: "Deriving evidence-based conclusions from complex datasets.",
+      },
+      {
+        title: "Methodological Integrity",
+        text: "Adherence to research design and ethics.",
+      },
+    ],
+  },
+  {
+    title: "Operational Readiness & Professional Integrity",
+    description: "Secure, collaborative operations in multidisciplinary institutional teams.",
+    cardClass: "card-3",
+    items: [
+      {
+        title: "Confidentiality (HIPAA)",
+        text: "Handling protected health and investigative information.",
+      },
+      {
+        title: "Interdisciplinary Collaboration",
+        text: "Coordinating with medical and administrative staff.",
+      },
+      {
+        title: "Mission-Driven",
+        text: "Promoting accountability and institutional trust.",
+      },
+    ],
+  },
+];
+---
+
+<section class="section-core" aria-labelledby="core-title">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-eyebrow">Capabilities</span>
+      <h2 id="core-title">Core Competencies</h2>
+      <p class="lead">An interdisciplinary foundation honed through direct field experience in investigative, institutional, and clinical settings.</p>
+    </div>
+
+    <div class="competency-grid">
+      {competencies.map((competency) => (
+        <div class={`card ${competency.cardClass}`}>
+          <h3>{competency.title}</h3>
+          <p>{competency.description}</p>
+          <ul>
+            {competency.items.map((item) => (
+              <li>
+                <strong>{item.title}</strong>
+                {item.text}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .section-core {
+    background: var(--bg-secondary);
+    padding: var(--space-24) 0;
+  }
+
+  .section-header {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto var(--space-16);
+  }
+
+  .section-eyebrow {
+    display: block;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--cern-blue);
+    margin-bottom: var(--space-3);
+  }
+
+  .competency-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-8);
+  }
+
+  .card {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-sm);
+    border-top: 4px solid var(--border-medium);
+  }
+
+  .card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .card-1 {
+    border-top-color: var(--cern-blue);
+  }
+
+  .card-2 {
+    border-top-color: var(--princeton-orange);
+  }
+
+  .card-3 {
+    border-top-color: var(--text-secondary);
+  }
+
+  .card h3 {
+    margin-bottom: var(--space-3);
+  }
+
+  .card > p {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-6);
+    font-size: 0.9375rem;
+  }
+
+  .card ul {
+    list-style: none;
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .card li {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    padding-left: var(--space-4);
+    border-left: 2px solid var(--border-subtle);
+  }
+
+  .card li strong {
+    color: var(--text-primary);
+    display: block;
+    margin-bottom: var(--space-1);
+  }
+</style>

@@ -1,21 +1,18 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Hero from "../components/Hero.astro";
+import CoreCompetencies from "../components/CoreCompetencies.astro";
+import TrustedExperience from "../components/TrustedExperience.astro";
 ---
 
-<Layout title="JG Walsh">
-  <main class="wrap">
-    <h1>jgwalsh.com — rebuild in progress</h1>
-    <p>Local dev + GitHub + Cloudflare Pages. Domain cutover later.</p>
+<BaseLayout>
+  <Header slot="header" currentPath="/" />
 
-    <nav class="links">
-      <a href="/about">About</a>
-      <a href="/projects">Projects</a>
-      <a href="/contact">Contact</a>
-    </nav>
-  </main>
-</Layout>
+  <Hero />
+  <CoreCompetencies />
+  <TrustedExperience />
 
-<style>
-  .wrap { max-width: 72ch; margin: 0 auto; padding: 4rem 1.25rem; }
-  .links { display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; }
-</style>
+  <Footer slot="footer" />
+</BaseLayout>
