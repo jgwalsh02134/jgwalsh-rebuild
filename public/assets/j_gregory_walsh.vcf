@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Walsh;James;Gregory;;
+FN:J. Gregory (Greg) Walsh
+EMAIL;TYPE=INTERNET:jgwalsh@proton.me
+EMAIL;TYPE=INTERNET:jgwalsh@bu.edu
+TEL;TYPE=CELL:+1-617-383-3745
+ADR;TYPE=HOME:;;75 Willett Street\, Apt. 3K;Albany;NY;12210;United States
+URL:https://jgwalsh.com/
+END:VCARD
