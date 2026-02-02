@@ -1,11 +1,19 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 ---
 
-<Layout title="Projects">
-  <main style="max-width:72ch;margin:0 auto;padding:4rem 1.25rem;">
-    <h1>Projects</h1>
-    <p>Placeholder page.</p>
-    <p><a href="/">← Home</a></p>
-  </main>
-</Layout>
+<BaseLayout title="Projects – James Gregory Walsh" description="Projects by James (J.) Gregory Walsh.">
+  <Header slot="header" currentPath="/projects" />
+
+  <section style={`padding: calc(var(--header-height) + var(--space-16)) 0 var(--space-16);`}>
+    <div class="container" style="max-width:72ch;">
+      <h1 style="font-family: var(--font-serif); font-size: var(--text-3xl); font-weight: 400; margin-bottom: var(--space-6);">Projects</h1>
+      <p style="color: var(--ink-60); margin-bottom: var(--space-6);">Placeholder page.</p>
+      <p><a class="btn btn-secondary" href="/">← Home</a></p>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>

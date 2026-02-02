@@ -1,4 +1,6 @@
 ---
+import "../styles/global.css";
+
 export interface Props {
   title?: string;
   description?: string;
@@ -63,7 +65,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://jgwalsh.
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
 
   <!-- Structured Data -->
   <script type="application/ld+json" set:html={JSON.stringify({
@@ -105,11 +107,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://jgwalsh.
       {
         "@type": "WebPage",
         "@id": "https://jgwalsh.com/#webpage",
-        "url": "https://jgwalsh.com/",
-        "name": "J. Gregory Walsh – Psychology, Behavioral Analysis & Investigative Readiness",
+        "url": canonicalURL,
+        "name": title,
         "isPartOf": { "@id": "https://jgwalsh.com/#website" },
         "about": { "@id": "https://jgwalsh.com/#person" },
-        "description": "James (J.) Gregory Walsh – psychology graduate leveraging behavioral analysis, clinical insight, and quantitative methods to support investigative, public safety, and data-informed institutional roles.",
+        "description": description,
         "inLanguage": "en-US"
       }
     ]
@@ -128,7 +130,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://jgwalsh.
 </head>
 
 <body>
-  <a href="#main-content" class="sr-only focus:not-sr-only">Skip to main content</a>
+  <a href="#main-content" class="sr-only">Skip to main content</a>
 
   <slot name="header" />
 
@@ -138,331 +140,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://jgwalsh.
 
   <slot name="footer" />
 
-  <script>
-    // Theme Management
-    const html = document.documentElement;
-    const themeToggle = document.getElementById('theme-toggle');
-
-    function setTheme(theme: 'light' | 'dark') {
-      if (theme === 'dark') {
-        html.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
-        themeToggle?.setAttribute('aria-label', 'Switch to light mode');
-      } else {
-        html.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
-        themeToggle?.setAttribute('aria-label', 'Switch to dark mode');
-      }
-    }
-
-    themeToggle?.addEventListener('click', () => {
-      const currentTheme = localStorage.getItem('theme') || (html.classList.contains('dark') ? 'dark' : 'light');
-      setTheme(currentTheme === 'dark' ? 'light' : 'dark');
-    });
-
-    // Mobile Navigation
-    const mobileToggle = document.querySelector('.mobile-toggle');
-    const mobileNav = document.getElementById('mobile-nav');
-
-    if (mobileToggle && mobileNav) {
-      mobileToggle.addEventListener('click', () => {
-        const isOpen = mobileNav.classList.toggle('is-open');
-        mobileToggle.setAttribute('aria-expanded', String(isOpen));
-      });
-
-      mobileNav.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-          mobileNav.classList.remove('is-open');
-          mobileToggle.setAttribute('aria-expanded', 'false');
-        });
-      });
-    }
-
-    // Header Scroll Effect
-    const siteHeader = document.querySelector('.site-header');
-    if (siteHeader) {
-      const scrollThreshold = 20;
-
-      const handleScroll = () => {
-        if (window.scrollY > scrollThreshold) {
-          siteHeader.classList.add('scrolled');
-        } else {
-          siteHeader.classList.remove('scrolled');
-        }
-      };
-
-      handleScroll();
-      window.addEventListener('scroll', handleScroll, { passive: true });
-    }
-  </script>
+  <script src="/js/site.js" defer></script>
 </body>
 </html>
-
-<style is:global>
-  /* ===================================
-      DESIGN SYSTEM - Swiss Clinical
-      =================================== */
-
-  :root {
-    /* Core Palette */
-    --cern-blue: #0053A0;
-    --cern-blue-hover: #003D75;
-    --cern-blue-light: #EBF5FF;
-    --cern-blue-tr: rgba(0, 83, 160, 0.08);
-
-    --princeton-orange: #E87722;
-    --princeton-orange-hover: #CC6619;
-    --princeton-orange-light: #FFF1E5;
-    --princeton-orange-tr: rgba(232, 119, 34, 0.08);
-
-    /* Neutrals - Light Mode */
-    --bg-primary: #ffffff;
-    --bg-secondary: #f4f4f5;
-    --bg-tertiary: #e4e4e7;
-    --bg-card: #ffffff;
-
-    --text-primary: #18181b;
-    --text-secondary: #52525b;
-    --text-tertiary: #71717a;
-    --text-inverted: #ffffff;
-
-    --border-subtle: #e4e4e7;
-    --border-medium: #d4d4d8;
-
-    /* Spacing Base (4px grid) */
-    --space-1: 0.25rem;
-    --space-2: 0.5rem;
-    --space-3: 0.75rem;
-    --space-4: 1rem;
-    --space-6: 1.5rem;
-    --space-8: 2rem;
-    --space-12: 3rem;
-    --space-16: 4rem;
-    --space-24: 6rem;
-    --space-32: 8rem;
-
-    /* Elevation & Effects */
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-    --shadow-blue-glow: 0 0 0 3px var(--cern-blue-tr);
-
-    --radius-sm: 4px;
-    --radius-md: 6px;
-    --radius-lg: 8px;
-    --radius-full: 9999px;
-    --header-height: 64px;
-  }
-
-  /* Dark Mode */
-  .dark {
-    --cern-blue: #60A5FA;
-    --cern-blue-hover: #93C5FD;
-    --cern-blue-light: rgba(96, 165, 250, 0.15);
-    --cern-blue-tr: rgba(96, 165, 250, 0.1);
-
-    --princeton-orange: #FB923C;
-    --princeton-orange-hover: #FDBA74;
-    --princeton-orange-light: rgba(251, 146, 60, 0.15);
-    --princeton-orange-tr: rgba(251, 146, 60, 0.1);
-
-    --bg-primary: #09090b;
-    --bg-secondary: #18181b;
-    --bg-tertiary: #27272a;
-    --bg-card: #141417;
-
-    --text-primary: #fafafa;
-    --text-secondary: #a1a1aa;
-    --text-tertiary: #71717a;
-    --text-inverted: #09090b;
-
-    --border-subtle: #27272a;
-    --border-medium: #3f3f46;
-
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.5);
-  }
-
-  /* ===================================
-      RESET & BASE
-      =================================== */
-  *, *::before, *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  html {
-    scroll-behavior: smooth;
-    -webkit-text-size-adjust: 100%;
-  }
-
-  body {
-    font-family: 'Inter', -apple-system, sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--text-primary);
-    background: var(--bg-primary);
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    overflow-x: hidden;
-  }
-
-  /* Typography System */
-  h1, h2, h3, h4 {
-    font-family: 'Crimson Pro', serif;
-    font-weight: 600;
-    line-height: 1.15;
-    letter-spacing: -0.03em;
-    color: var(--text-primary);
-  }
-
-  h1 {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 700;
-    letter-spacing: -0.04em;
-    line-height: 1.1;
-  }
-
-  h2 {
-    font-size: clamp(2rem, 4vw, 2.75rem);
-  }
-
-  h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-  }
-
-  p {
-    max-width: 65ch;
-    letter-spacing: -0.01em;
-  }
-
-  p.lead {
-    font-size: 1.25rem;
-    line-height: 1.5;
-    color: var(--text-secondary);
-    font-weight: 400;
-  }
-
-  strong {
-    font-weight: 600;
-    color: var(--text-primary);
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-    transition: all 0.2s ease;
-  }
-
-  :focus-visible {
-    outline: 2px solid var(--cern-blue);
-    outline-offset: 4px;
-    border-radius: 2px;
-  }
-
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-  }
-
-  .hidden {
-    display: none;
-  }
-
-  .dark .dark\:block {
-    display: block;
-  }
-
-  .dark .dark\:hidden {
-    display: none;
-  }
-
-  /* ===================================
-      COMPONENTS
-      =================================== */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.875rem 2rem;
-    font-weight: 600;
-    font-size: 1rem;
-    border-radius: var(--radius-md);
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-    gap: var(--space-3);
-    letter-spacing: -0.01em;
-    position: relative;
-    overflow: hidden;
-    user-select: none;
-    box-shadow: var(--shadow-sm);
-  }
-
-  .btn:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 3px var(--bg-primary), 0 0 0 5px var(--cern-blue);
-  }
-
-  .btn:active {
-    transform: translateY(0) scale(0.98) !important;
-    box-shadow: none !important;
-  }
-
-  .btn-primary {
-    background-color: var(--cern-blue);
-    color: white;
-    border: 1px solid var(--cern-blue);
-  }
-
-  .btn-primary:hover {
-    background-color: var(--cern-blue-hover);
-    border-color: var(--cern-blue-hover);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-  }
-
-  .btn-secondary {
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
-    border: 1px solid var(--border-medium);
-  }
-
-  .btn-secondary:hover {
-    border-color: var(--text-primary);
-    background-color: var(--bg-secondary);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-  }
-
-  .dark .btn-secondary:hover {
-    background-color: var(--bg-tertiary);
-  }
-
-  .container {
-    width: 100%;
-    max-width: 1280px;
-    margin-inline: auto;
-    padding-inline: var(--space-6);
-  }
-
-  /* Animations */
-  @keyframes fadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-</style>

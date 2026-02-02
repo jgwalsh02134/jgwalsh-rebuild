@@ -13,22 +13,22 @@ const professionalLinks = [
   {
     href: "https://www.linkedin.com/in/jgregorywalsh",
     label: "LinkedIn",
-    icon: "https://iconsusa.org/assets/icons_copy/linkedin.svg",
+    icon: "/icons/icons8-linkedin-2.svg",
   },
   {
-    href: "https://github.com/jgregorywalsh",
+    href: "https://github.com/jgwalsh02134",
     label: "GitHub",
-    icon: "https://iconsusa.org/assets/icons_copy/github-2.svg",
+    icon: "/icons/github-white-icon.svg",
   },
   {
     href: "https://orcid.org/0000-0002-4420-5724",
     label: "ORCID",
-    icon: "https://iconsusa.org/assets/icons_copy/orcid.svg",
+    icon: "/icons/orcid.logo.icon.svg",
   },
   {
     href: "https://www.usajobs.gov/applicant/profile/",
     label: "USAJobs.gov",
-    icon: "https://iconsusa.org/assets/icons_copy/icons8-usa.svg",
+    icon: "/icons/usa-flag-icon.svg",
   },
 ];
 ---
@@ -40,7 +40,7 @@ const professionalLinks = [
       <div class="footer-brand">
         <div class="footer-brand-logo">
           <span class="brand-logo" aria-hidden="true">
-            <img src="/images/w1-site-logo.svg" alt="" />
+            <img src="/favicon.svg" alt="" />
           </span>
           <span>J. Gregory Walsh</span>
         </div>
@@ -68,7 +68,7 @@ const professionalLinks = [
           {professionalLinks.map((link) => (
             <li>
               <a href={link.href} target="_blank" rel="noopener" class="footer-link">
-                <img src={link.icon} alt={link.label} class="footer-icon" />
+                <img src={link.icon} alt="" class="footer-icon" aria-hidden="true" />
                 {link.label}
               </a>
             </li>
@@ -108,138 +108,3 @@ const professionalLinks = [
     </div>
   </div>
 </footer>
-
-<style>
-  .site-footer {
-    background: var(--bg-secondary);
-    padding: var(--space-24) 0 var(--space-12);
-    border-top: 1px solid var(--border-subtle);
-    font-size: 0.9375rem;
-  }
-
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 2fr repeat(3, 1fr);
-    gap: var(--space-12);
-    margin-bottom: var(--space-24);
-  }
-
-  .footer-brand {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
-  }
-
-  .footer-brand-logo {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    font-family: 'Crimson Pro', serif;
-    font-weight: 700;
-    font-size: 1.25rem;
-    color: var(--text-primary);
-    letter-spacing: -0.02em;
-  }
-
-  .footer-brand-logo .brand-logo {
-    width: 24px;
-    height: 24px;
-  }
-
-  .footer-brand-logo .brand-logo img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-
-  .footer-tagline {
-    max-width: 30ch;
-    font-size: 0.9375rem;
-    color: var(--text-secondary);
-  }
-
-  .footer-col-header {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-weight: 700;
-    color: var(--text-tertiary);
-    margin-bottom: var(--space-6);
-  }
-
-  .footer-menu {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-  }
-
-  .footer-link {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    color: var(--text-secondary);
-    transition: all 0.2s ease;
-    font-weight: 500;
-  }
-
-  .footer-link:hover {
-    color: var(--cern-blue);
-    transform: translateX(4px);
-  }
-
-  .footer-location {
-    cursor: default;
-  }
-
-  .footer-location:hover {
-    transform: none;
-    color: var(--text-secondary);
-  }
-
-  .footer-icon {
-    width: 18px;
-    height: 18px;
-    flex-shrink: 0;
-    opacity: 0.6;
-    transition: opacity 0.2s ease;
-  }
-
-  .footer-link:hover .footer-icon {
-    opacity: 1;
-  }
-
-  .footer-bottom {
-    padding-top: var(--space-8);
-    border-top: 1px solid var(--border-medium);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: var(--text-tertiary);
-    font-size: 0.875rem;
-  }
-
-  @media (max-width: 1024px) {
-    .footer-grid {
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-12) var(--space-6);
-    }
-
-    .footer-brand {
-      grid-column: 1 / -1;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .footer-grid {
-      grid-template-columns: 1fr;
-      gap: var(--space-12);
-    }
-
-    .footer-bottom {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: var(--space-4);
-    }
-  }
-</style>
