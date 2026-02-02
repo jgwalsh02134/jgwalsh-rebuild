@@ -7,11 +7,11 @@ import Footer from "../components/Footer.astro";
 <BaseLayout title="Blog – James Gregory Walsh" description="Blog posts by James (J.) Gregory Walsh.">
   <Header slot="header" currentPath="/blog" />
 
-  <section style={`padding: calc(var(--header-height) + var(--space-16)) 0 var(--space-16);`}>
-    <div class="container" style="max-width:72ch;">
-      <h1 style="font-family: var(--font-serif); font-size: var(--text-3xl); font-weight: 400; margin-bottom: var(--space-6);">Blog</h1>
-      <p style="color: var(--ink-60); margin-bottom: var(--space-6);">Placeholder page.</p>
-      <p><a class="btn btn-secondary" href="/">← Home</a></p>
+  <section class="page-section">
+    <div class="container page-inner">
+      <h1 class="page-title">Blog</h1>
+      <p class="page-lead">Placeholder page.</p>
+      <p class="page-actions"><a class="btn btn-secondary" href="/">← Home</a></p>
     </div>
   </section>
 

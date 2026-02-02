@@ -11,9 +11,11 @@
   --cern-blue: #0033A0;
   --cern-blue-dark: #002470;
   --cern-blue-light: #0047CC;
+  --cern-blue-tr: rgba(0, 51, 160, 0.12);
   --princeton-orange: #FF6B00;
   --princeton-orange-dark: #E05E00;
   --princeton-orange-light: #FF8533;
+  --princeton-orange-tr: rgba(255, 107, 0, 0.12);
 
   /* Neutrals */
   --ink: #0A0A0A;
@@ -80,6 +82,8 @@
   --cern-blue: #3366CC;
   --cern-blue-light: #4D7FD9;
   --princeton-orange: #FF8533;
+  --cern-blue-tr: rgba(51, 102, 204, 0.16);
+  --princeton-orange-tr: rgba(255, 133, 51, 0.14);
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -131,6 +135,15 @@ button {
   border: none;
 }
 
+/* Accessible focus (site-wide) */
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible {
+  outline: 3px solid rgba(0, 51, 160, 0.35);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
 ul, ol {
   list-style: none;
 }
@@ -180,6 +193,35 @@ ul, ol {
   .container {
     padding: 0 var(--space-12);
   }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   GENERIC PAGE LAYOUT PRIMITIVES (non-home pages)
+   ═══════════════════════════════════════════════════════════════ */
+
+.page-section {
+  padding: calc(var(--header-height) + var(--space-16)) 0 var(--space-20);
+}
+
+.page-inner {
+  max-width: 72ch;
+}
+
+.page-title {
+  font-family: var(--font-serif);
+  font-size: var(--text-3xl);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-6);
+}
+
+.page-lead {
+  color: var(--ink-60);
+  margin-bottom: var(--space-6);
+}
+
+.page-actions {
+  margin-top: var(--space-6);
 }
 
 /* ═══════════════════════════════════════════════════════════════
