@@ -13,8 +13,8 @@ import Footer from "../components/Footer.astro";
   <!-- Body content adapted from pasted HTML; Tailwind utilities replaced with page-scoped CSS -->
   <section class="contact-page" aria-labelledby="contact-title">
     <div class="contact-frame">
-      <div class="contact-card">
-        <div class="contact-identity">
+      <div class="contact-card fade-in">
+        <div class="contact-identity fade-in stagger-1">
           <div class="contact-monogram" aria-hidden="true">
             <span class="contact-monogram-text">JGW</span>
           </div>
@@ -22,7 +22,7 @@ import Footer from "../components/Footer.astro";
           <p class="contact-subtitle">Add to contacts with one click.</p>
         </div>
 
-        <div class="contact-actions">
+        <div class="contact-actions fade-in stagger-2">
           <a href="mailto:jgwalsh@proton.me" class="contact-action">
             <span class="contact-action-left">
               <img src="/icons/icons8-protonmail-2.svg" alt="" class="contact-action-leading-icon" aria-hidden="true" loading="lazy" />
@@ -43,7 +43,7 @@ import Footer from "../components/Footer.astro";
           </a>
         </div>
 
-        <div class="contact-links" aria-label="Professional links">
+        <div class="contact-links fade-in stagger-3" aria-label="Professional links">
           <div class="contact-links-grid">
             <a
               href="https://www.linkedin.com/in/jgregorywalsh"
@@ -92,7 +92,7 @@ import Footer from "../components/Footer.astro";
           </div>
         </div>
 
-        <div class="contact-vcard">
+        <div class="contact-vcard fade-in stagger-3">
           <a
             href="/assets/j-gregory-walsh.vcf"
             type="text/vcard"
@@ -131,6 +131,12 @@ import Footer from "../components/Footer.astro";
       radial-gradient(700px 320px at 50% 0%, rgba(0, 51, 160, 0.10), transparent 60%),
       radial-gradient(520px 360px at 90% 35%, rgba(255, 107, 0, 0.10), transparent 55%);
     pointer-events: none;
+  }
+
+  :global(.dark) .contact-page::before {
+    background:
+      radial-gradient(700px 320px at 50% 0%, rgba(51, 102, 204, 0.08), transparent 60%),
+      radial-gradient(520px 360px at 90% 35%, rgba(255, 133, 51, 0.08), transparent 55%);
   }
 
   .contact-frame {
@@ -263,10 +269,13 @@ import Footer from "../components/Footer.astro";
     color: var(--text-tertiary);
     opacity: 0.9;
     flex: 0 0 auto;
+    transition: transform var(--duration-fast) var(--ease-out), 
+      color var(--duration-fast) var(--ease-out);
   }
 
   .contact-action:hover .contact-action-icon {
     color: var(--cern-blue);
+    transform: translate(2px, -2px);
   }
 
   .contact-links {
@@ -444,6 +453,7 @@ import Footer from "../components/Footer.astro";
 
     :global(.dark) .contact-frame {
       background: rgba(10, 10, 10, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
     }
   }
