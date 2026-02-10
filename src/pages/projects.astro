@@ -2,18 +2,381 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+
+type Project = {
+  title: string;
+  description: string;
+  tags: string[];
+  category: "Behavioral Science" | "Data Analysis" | "Research" | "Web Dev";
+  image?: string;
+  link: string;
+};
+
+const projects: Project[] = [
+  {
+    title: "Psyber Nexus",
+    description:
+      "A platform exploring psychology, cybersecurity, and operational resilience with an emphasis on investigative clarity and accessible presentation.",
+    tags: ["HTML", "CSS", "Information Design", "Threat Modeling"],
+    category: "Web Dev",
+    image: "/images/V-Data-Text-Logo.svg",
+    link: "https://www.psybernexus.com",
+  },
+  {
+    title: "Inpatient Risk Assessment Model",
+    description:
+      "A structured approach to triage and behavioral risk assessment using clinical observations, safety planning signals, and documentation patterns.",
+    tags: ["Crisis Intervention", "Assessment", "Structured Interviewing", "Documentation"],
+    category: "Behavioral Science",
+    link: "#",
+  },
+  {
+    title: "De-escalation Outcomes Dashboard",
+    description:
+      "A lightweight analysis view that summarizes incident patterns, intervention outcomes, and unit-level trends for operational learning.",
+    tags: ["Excel", "SPSS", "Data Interpretation", "Operational Metrics"],
+    category: "Data Analysis",
+    link: "#",
+  },
+  {
+    title: "Research Methods & Integrity Toolkit",
+    description:
+      "A methodology-oriented reference for hypothesis testing, variable definition, and reproducible analysis workflows across small studies.",
+    tags: ["Research Design", "Hypothesis Testing", "Reproducibility"],
+    category: "Research",
+    link: "#",
+  },
+  {
+    title: "Behavioral Pattern Annotation Guide",
+    description:
+      "A practical schema for tagging behavioral cues and psychosocial factors to support consistent case review and team communication.",
+    tags: ["Pattern Recognition", "Team Collaboration", "Quality"],
+    category: "Behavioral Science",
+    link: "#",
+  },
+  {
+    title: "Market Trend Analysis Briefing",
+    description:
+      "A concise research/analysis briefing format designed to translate complex signals into decision-ready summaries.",
+    tags: ["Research", "Quantitative Analysis", "Briefing"],
+    category: "Data Analysis",
+    link: "#",
+  },
+];
 ---
 
 <BaseLayout title="Projects – James Gregory Walsh" description="Projects by James (J.) Gregory Walsh.">
   <Header slot="header" currentPath="/projects" />
 
-  <section class="page-section">
-    <div class="container page-inner">
-      <h1 class="page-title">Projects</h1>
-      <p class="page-lead">Placeholder page.</p>
-      <p class="page-actions"><a class="btn btn-secondary" href="/">← Home</a></p>
+  <section class="projects-page">
+    <div class="container projects-inner">
+      <header class="projects-hero fade-in">
+        <h1 class="projects-title">Selected Work</h1>
+        <p class="projects-subtitle">Projects at the intersection of psychology, behavioral analysis, and data-informed decision support.</p>
+      </header>
+
+      <div class="projects-controls fade-in stagger-1" aria-label="Projects controls">
+        <div class="projects-filters" role="group" aria-label="Filter projects">
+          <button type="button" class="filter-btn is-active" data-filter="All" aria-pressed="true">All</button>
+          <button type="button" class="filter-btn" data-filter="Behavioral Science" aria-pressed="false">Behavioral Science</button>
+          <button type="button" class="filter-btn" data-filter="Data Analysis" aria-pressed="false">Data Analysis</button>
+          <button type="button" class="filter-btn" data-filter="Research" aria-pressed="false">Research</button>
+          <button type="button" class="filter-btn" data-filter="Web Dev" aria-pressed="false">Web Dev</button>
+        </div>
+
+        <div class="projects-view" role="group" aria-label="View mode">
+          <button type="button" class="view-btn is-active" data-view="grid" aria-pressed="true" aria-label="Grid view">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="8" height="8" rx="1"></rect>
+              <rect x="13" y="3" width="8" height="8" rx="1"></rect>
+              <rect x="3" y="13" width="8" height="8" rx="1"></rect>
+              <rect x="13" y="13" width="8" height="8" rx="1"></rect>
+            </svg>
+          </button>
+          <button type="button" class="view-btn" data-view="list" aria-pressed="false" aria-label="List view">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="8" y1="6" x2="21" y2="6"></line>
+              <line x1="8" y1="12" x2="21" y2="12"></line>
+              <line x1="8" y1="18" x2="21" y2="18"></line>
+              <rect x="3" y="5" width="2" height="2" rx="0.5"></rect>
+              <rect x="3" y="11" width="2" height="2" rx="0.5"></rect>
+              <rect x="3" y="17" width="2" height="2" rx="0.5"></rect>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="projects-grid" class="projects-grid" aria-label="Project listing">
+        {projects.map((p) => (
+          <div class="project-item" data-project data-category={p.category}>
+            <ProjectCard
+              title={p.title}
+              description={p.description}
+              tags={p.tags}
+              category={p.category}
+              image={p.image}
+              link={p.link}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 
   <Footer slot="footer" />
 </BaseLayout>
+
+<script>
+  const grid = document.getElementById("projects-grid");
+  const filterButtons = Array.from(document.querySelectorAll(".filter-btn")).filter(
+    (el) => el instanceof HTMLButtonElement,
+  );
+  const viewButtons = Array.from(document.querySelectorAll(".view-btn")).filter(
+    (el) => el instanceof HTMLButtonElement,
+  );
+  // Project items are authored with `data-category`, so select by that to keep filtering robust.
+  const items = Array.from(document.querySelectorAll(".project-item[data-category]")).filter(
+    (el) => el instanceof HTMLElement,
+  );
+
+  const DURATION_MS = 160;
+  const hideTimers = new WeakMap();
+
+  function setActiveButton(buttons, active) {
+    buttons.forEach((b) => {
+      const isActive = b === active;
+      b.classList.toggle("is-active", isActive);
+      b.setAttribute("aria-pressed", String(isActive));
+    });
+  }
+
+  function hideItem(item) {
+    const pending = hideTimers.get(item);
+    if (pending) {
+      clearTimeout(pending);
+      hideTimers.delete(item);
+    }
+    if (item.hidden) return;
+    item.classList.add("is-out");
+    const t = window.setTimeout(() => {
+      item.hidden = true;
+      hideTimers.delete(item);
+    }, DURATION_MS);
+    hideTimers.set(item, t);
+  }
+
+  function showItem(item) {
+    const pending = hideTimers.get(item);
+    if (pending) {
+      clearTimeout(pending);
+      hideTimers.delete(item);
+    }
+    if (!item.hidden) return;
+    item.hidden = false;
+    // Ensure transition runs
+    item.classList.add("is-out");
+    requestAnimationFrame(() => item.classList.remove("is-out"));
+  }
+
+  function applyFilter(filter) {
+    items.forEach((item) => {
+      const category = item.dataset.category || "";
+      const match = filter === "All" || category === filter;
+      if (match) showItem(item);
+      else hideItem(item);
+    });
+  }
+
+  filterButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      setActiveButton(filterButtons, btn);
+      applyFilter(btn.dataset.filter || "All");
+    });
+  });
+
+  viewButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      setActiveButton(viewButtons, btn);
+      const view = btn.dataset.view || "grid";
+      grid?.classList.toggle("view-list", view === "list");
+    });
+  });
+</script>
+
+<style>
+  .projects-page {
+    padding: calc(var(--header-height) + var(--space-16)) 0 var(--space-24);
+  }
+
+  .projects-inner {
+    max-width: 1120px;
+  }
+
+  .projects-hero {
+    max-width: 80ch;
+    margin-bottom: var(--space-12);
+  }
+
+  .projects-title {
+    font-family: var(--font-serif);
+    font-size: var(--text-4xl);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin-bottom: var(--space-4);
+  }
+
+  .projects-subtitle {
+    color: var(--ink-60);
+    font-size: var(--text-lg);
+    line-height: 1.75;
+  }
+
+  .projects-controls {
+    display: grid;
+    gap: var(--space-6);
+    padding: var(--space-6);
+    border: 1px solid var(--ink-10);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.55);
+    margin-bottom: var(--space-12);
+  }
+
+  :global(.dark) .projects-controls {
+    background: rgba(10, 10, 10, 0.55);
+    border-color: var(--ink-20);
+  }
+
+  .projects-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .filter-btn {
+    min-height: 44px;
+    padding: var(--space-2) var(--space-4);
+    border-radius: 9999px;
+    border: 1px solid var(--ink-10);
+    background: transparent;
+    color: var(--ink-60);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    transition:
+      border-color var(--duration-fast) var(--ease-out),
+      color var(--duration-fast) var(--ease-out),
+      background var(--duration-fast) var(--ease-out);
+  }
+
+  .filter-btn:hover {
+    color: var(--ink);
+    border-color: var(--ink-20);
+    background: var(--ink-10);
+  }
+
+  .filter-btn.is-active {
+    color: white;
+    background: var(--cern-blue);
+    border-color: rgba(0, 51, 160, 0.4);
+  }
+
+  .projects-view {
+    display: inline-flex;
+    gap: var(--space-2);
+    justify-content: flex-start;
+  }
+
+  .view-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    border: 1px solid var(--ink-10);
+    background: transparent;
+    color: var(--ink-60);
+    display: grid;
+    place-items: center;
+    transition:
+      border-color var(--duration-fast) var(--ease-out),
+      color var(--duration-fast) var(--ease-out),
+      background var(--duration-fast) var(--ease-out);
+  }
+
+  .view-btn:hover {
+    color: var(--ink);
+    border-color: var(--ink-20);
+    background: var(--ink-10);
+  }
+
+  .view-btn.is-active {
+    color: var(--cern-blue);
+    border-color: rgba(0, 51, 160, 0.35);
+    background: rgba(0, 51, 160, 0.06);
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .project-item {
+    transition:
+      opacity var(--duration-fast) var(--ease-out),
+      transform var(--duration-fast) var(--ease-out);
+  }
+
+  .project-item.is-out {
+    opacity: 0;
+    transform: translateY(8px);
+    pointer-events: none;
+  }
+
+  .projects-grid.view-list {
+    grid-template-columns: 1fr;
+  }
+
+  .projects-grid.view-list :global(.project-card__link) {
+    grid-template-columns: 220px 1fr;
+    grid-template-rows: 1fr;
+  }
+
+  .projects-grid.view-list :global(.project-card__media) {
+    aspect-ratio: auto;
+    height: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .projects-controls {
+      grid-template-columns: 1fr auto;
+      align-items: center;
+    }
+
+    .projects-view {
+      justify-content: flex-end;
+    }
+
+    .projects-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-8);
+    }
+
+    .projects-grid.view-list {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .projects-page {
+      padding: calc(var(--header-height) + var(--space-20)) 0 var(--space-32);
+    }
+
+    .projects-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .projects-grid.view-list :global(.project-card__link) {
+      grid-template-columns: 260px 1fr;
+    }
+  }
+</style>
