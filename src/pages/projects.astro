@@ -3,21 +3,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import ProjectCard from "../components/ProjectCard.astro";
----
 
 const filters = ["All", "Behavioral Science", "Data Analysis", "Research", "Web Dev"] as const;
-type Filter = (typeof filters)[number];
 
-type Project = {
-  title: string;
-  description: string;
-  tags: string[];
-  category: Exclude<Filter, "All">;
-  image?: string;
-  link: string;
-};
-
-const projects: Project[] = [
+const projects = [
   {
     title: "Psyber Nexus",
     description: "A research-backed platform exploring psychology, cybersecurity, operational resilience, and digital deception patterns.",
@@ -61,6 +50,7 @@ const projects: Project[] = [
     link: "/resume",
   },
 ];
+---
 
 <BaseLayout title="Projects – James Gregory Walsh" description="Projects by James (J.) Gregory Walsh.">
   <Header slot="header" currentPath="/projects" />
@@ -123,7 +113,9 @@ const projects: Project[] = [
         ))}
       </div>
 
-      <script type="module" src={Astro.resolve("../scripts/projects.ts")}></script>
+      <script>
+        import "../../src/scripts/projects.ts";
+      </script>
     </div>
   </section>
 
