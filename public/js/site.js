@@ -21,16 +21,19 @@
     const themeToggle = document.getElementById('theme-toggle');
     if (!themeToggle) return;
 
+    // Reflect current state without rewriting the existing aria-label text.
+    themeToggle.setAttribute(
+      'aria-pressed',
+      String(html.classList.contains('dark'))
+    );
+
     themeToggle.addEventListener('click', () => {
       const current =
         localStorage.getItem('theme') ||
         (html.classList.contains('dark') ? 'dark' : 'light');
       const next = current === 'dark' ? 'light' : 'dark';
       setTheme(next);
-      themeToggle.setAttribute(
-        'aria-label',
-        next === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
-      );
+      themeToggle.setAttribute('aria-pressed', String(next === 'dark'));
     });
   }
 
