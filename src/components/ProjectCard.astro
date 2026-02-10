@@ -12,159 +12,133 @@ const { title, description, tags, category, image, link } = Astro.props;
 ---
 
 <article class="project-card" data-category={category}>
-  {image ? (
-    <a class="project-card__media" href={link}>
-      <img class="project-card__image" src={image} alt="" loading="lazy" />
-    </a>
-  ) : null}
+  <a class="project-card__link" href={link}>
+    <div class="project-card__media" aria-hidden="true">
+      {image ? (
+        <img class="project-card__img" src={image} alt="" loading="lazy" />
+      ) : (
+        <div class="project-card__placeholder" aria-hidden="true"></div>
+      )}
+    </div>
 
-  <div class="project-card__body">
-    <header class="project-card__header">
-      <h3 class="project-card__title">
-        <a class="project-card__titleLink" href={link}>{title}</a>
-      </h3>
-      <p class="project-card__desc">{description}</p>
-    </header>
+    <div class="project-card__body">
+      <h3 class="project-card__title">{title}</h3>
+      <p class="project-card__description">{description}</p>
 
-    <ul class="project-card__tags" aria-label="Project tags">
-      {tags.map((tag) => (
-        <li><span class="project-tag">{tag}</span></li>
-      ))}
-    </ul>
-  </div>
+      <ul class="project-card__tags" aria-label="Tags">
+        {tags.map((t) => (
+          <li><span class="project-chip">{t}</span></li>
+        ))}
+      </ul>
+    </div>
+  </a>
 </article>
 
 <style>
   .project-card {
-    background: var(--pure-white);
+    border-radius: 12px;
     border: 1px solid var(--ink-10);
-    border-radius: 14px;
-    padding: var(--space-8);
-    display: grid;
-    gap: var(--space-6);
+    background: rgba(255, 255, 255, 0.6);
+    overflow: hidden;
     transition:
-      transform var(--duration-normal) var(--ease-out),
-      box-shadow var(--duration-normal) var(--ease-out),
-      border-color var(--duration-normal) var(--ease-out);
-    will-change: transform;
+      transform var(--duration-fast) var(--ease-out),
+      box-shadow var(--duration-fast) var(--ease-out),
+      border-color var(--duration-fast) var(--ease-out),
+      background var(--duration-fast) var(--ease-out);
   }
 
   :global(.dark) .project-card {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(10, 10, 10, 0.55);
     border-color: var(--ink-20);
   }
 
   .project-card:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
-    border-color: rgba(0, 51, 160, 0.25);
+    border-color: rgba(0, 51, 160, 0.28);
+    background: rgba(0, 51, 160, 0.04);
   }
 
-  .project-card:focus-within {
-    border-color: rgba(0, 51, 160, 0.35);
-    box-shadow: 0 0 0 3px rgba(0, 51, 160, 0.16);
+  .project-card__link {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100%;
   }
 
   .project-card__media {
-    display: block;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid var(--ink-10);
-    background: var(--paper);
-  }
-
-  :global(.dark) .project-card__media {
-    border-color: var(--ink-20);
-    background: rgba(255, 255, 255, 0.03);
-  }
-
-  .project-card__image {
     width: 100%;
-    height: auto;
-    display: block;
     aspect-ratio: 16 / 9;
+    background: var(--ink-10);
+    position: relative;
+  }
+
+  .project-card__img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
   }
 
+  .project-card__placeholder {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(135deg, rgba(0, 51, 160, 0.10), transparent 55%),
+      linear-gradient(45deg, rgba(255, 107, 0, 0.10), transparent 55%);
+  }
+
   .project-card__body {
+    padding: var(--space-6);
     display: grid;
-    gap: var(--space-6);
+    gap: var(--space-3);
+    align-content: start;
   }
 
   .project-card__title {
-    font-size: var(--text-xl);
+    font-size: var(--text-lg);
     font-weight: 600;
     letter-spacing: -0.01em;
-    line-height: 1.2;
-    margin-bottom: var(--space-2);
-  }
-
-  .project-card__titleLink {
     color: var(--ink);
   }
 
-  :global(.dark) .project-card__titleLink {
+  :global(.dark) .project-card__title {
     color: var(--ink);
   }
 
-  .project-card__titleLink:hover {
-    color: var(--cern-blue);
-  }
-
-  .project-card__desc {
-    color: var(--ink-60);
+  .project-card__description {
     font-size: var(--text-sm);
     line-height: 1.75;
-    max-width: 70ch;
+    color: var(--ink-60);
   }
 
   .project-card__tags {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-2);
+    margin-top: var(--space-2);
   }
 
-  .project-tag {
+  .project-chip {
     display: inline-flex;
     align-items: center;
-    padding: var(--space-2) var(--space-3);
+    padding: var(--space-1) var(--space-3);
     border-radius: 9999px;
     background: var(--ink-10);
     border: 1px solid transparent;
-    color: var(--ink-80);
     font-size: var(--text-xs);
-    line-height: 1.2;
-    transition: border-color var(--duration-fast) var(--ease-out),
-      background var(--duration-fast) var(--ease-out);
+    color: var(--ink-80);
+    transition:
+      background var(--duration-fast) var(--ease-out),
+      border-color var(--duration-fast) var(--ease-out);
   }
 
-  :global(.dark) .project-tag {
+  .project-card:hover .project-chip {
+    border-color: rgba(0, 51, 160, 0.22);
+    background: rgba(0, 51, 160, 0.06);
+  }
+
+  :global(.dark) .project-chip {
     background: rgba(255, 255, 255, 0.06);
     color: var(--ink-80);
-  }
-
-  .project-card:hover .project-tag {
-    border-color: rgba(0, 51, 160, 0.25);
-  }
-
-  /* List mode: handled by toggling a class on the grid container */
-  :global(.projects-grid.view-list) .project-card {
-    grid-template-columns: 168px 1fr;
-    align-items: start;
-  }
-
-  :global(.projects-grid.view-list) .project-card__media {
-    margin-top: 2px;
-  }
-
-  :global(.projects-grid.view-list) .project-card__image {
-    aspect-ratio: 4 / 3;
-  }
-
-  @media (max-width: 520px) {
-    :global(.projects-grid.view-list) .project-card {
-      grid-template-columns: 1fr;
-    }
   }
 </style>
 
