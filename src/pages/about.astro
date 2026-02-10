@@ -7,13 +7,263 @@ import Footer from "../components/Footer.astro";
 <BaseLayout title="About – James Gregory Walsh" description="About James (J.) Gregory Walsh.">
   <Header slot="header" currentPath="/about" />
 
-  <section class="page-section">
-    <div class="container page-inner">
-      <h1 class="page-title">About</h1>
-      <p class="page-lead">Placeholder page.</p>
-      <p class="page-actions"><a class="btn btn-secondary" href="/">← Home</a></p>
+  <section class="about-page">
+    <div class="container about-inner">
+      <div class="about-grid">
+        <!-- Left column / top on mobile -->
+        <aside class="about-aside fade-in">
+          <div class="about-photo" aria-hidden="true"></div>
+
+          <div class="about-links" aria-label="Contact links">
+            <a
+              class="about-link"
+              href="https://www.linkedin.com/in/jgregorywalsh"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src="/icons/icons8-linkedin-2.svg" alt="" class="about-link-icon" aria-hidden="true" loading="lazy" />
+              LinkedIn
+            </a>
+            <a class="about-link" href="mailto:jgwalsh@proton.me">
+              <img src="/icons/icons8-protonmail-2.svg" alt="" class="about-link-icon" aria-hidden="true" loading="lazy" />
+              Email
+            </a>
+          </div>
+        </aside>
+
+        <!-- Right column / bottom on mobile -->
+        <div class="about-main">
+          <header class="about-header fade-in stagger-1">
+            <h1 class="about-title">About J. Gregory Walsh</h1>
+          </header>
+
+          <section class="about-bio fade-in stagger-2" aria-label="Professional Summary">
+            <p class="about-lead">Experienced mental health counselor with over five years delivering crisis intervention, conducting behavioral assessments, and providing clinical support services to diverse groups in a premier academic-affiliated clinical environment emphasizing research-informed practices.</p>
+            <p class="about-body">Applies psychological insight, analytical methods, data literacy, and hands-on experience in applied clinical psychology to enhance resilience, assess risks, and optimize operations across public and private sectors. Proven in collaborative teams; seeking roles in analysis, security, or related fields with a foundation in psychology and discipline.</p>
+          </section>
+
+          <section class="about-competencies fade-in stagger-3" aria-labelledby="competencies-title">
+            <h2 id="competencies-title" class="about-section-title">Competencies</h2>
+
+            <div class="about-competency">
+              <h3 class="about-competency-title">Behavioral & Intervention</h3>
+              <ul class="about-chips" aria-label="Behavioral & Intervention">
+                <li><span class="about-chip">Crisis de-escalation and suicide prevention</span></li>
+                <li><span class="about-chip">Group facilitation (CBT/DBT), therapeutic rapport building</span></li>
+                <li><span class="about-chip">Pattern recognition for behavioral triggers and psychosocial factors</span></li>
+                <li><span class="about-chip">Structured interviewing to identify motivations and risks</span></li>
+              </ul>
+            </div>
+
+            <div class="about-competency">
+              <h3 class="about-competency-title">Analytical & Data</h3>
+              <ul class="about-chips" aria-label="Analytical & Data">
+                <li><span class="about-chip">SPSS, R, Excel; working knowledge of Python</span></li>
+                <li><span class="about-chip">Data interpretation for evidence-based conclusions</span></li>
+                <li><span class="about-chip">Hypothesis testing and methodological integrity in research</span></li>
+              </ul>
+            </div>
+
+            <div class="about-competency">
+              <h3 class="about-competency-title">Technical</h3>
+              <ul class="about-chips" aria-label="Technical">
+                <li><span class="about-chip">HTML and Tailwind CSS for platform development</span></li>
+                <li><span class="about-chip">Digital behavior analysis and threat environment profiling</span></li>
+              </ul>
+            </div>
+
+            <div class="about-competency">
+              <h3 class="about-competency-title">Interpersonal & Operational</h3>
+              <ul class="about-chips" aria-label="Interpersonal & Operational">
+                <li><span class="about-chip">Clinical documentation and care coordination</span></li>
+                <li><span class="about-chip">Interdisciplinary collaboration with medical and administrative teams</span></li>
+                <li><span class="about-chip">Team-based discipline from competitive rugby background</span></li>
+                <li><span class="about-chip">Confidentiality handling (e.g., HIPAA compliance)</span></li>
+              </ul>
+            </div>
+          </section>
+        </div>
+      </div>
     </div>
   </section>
 
   <Footer slot="footer" />
 </BaseLayout>
+
+<style>
+  .about-page {
+    padding: calc(var(--header-height) + var(--space-16)) 0 var(--space-24);
+  }
+
+  .about-inner {
+    max-width: 1120px;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+    align-items: start;
+  }
+
+  .about-aside {
+    display: grid;
+    gap: var(--space-8);
+  }
+
+  .about-photo {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background: var(--ink-10);
+    border: 1px solid var(--ink-20);
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.10);
+  }
+
+  .about-links {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .about-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-height: 48px;
+    padding: var(--space-3) var(--space-4);
+    border-radius: 10px;
+    border: 1px solid var(--ink-10);
+    background: rgba(255, 255, 255, 0.55);
+    color: var(--ink-80);
+    transition: border-color var(--duration-fast) var(--ease-out),
+      background var(--duration-fast) var(--ease-out),
+      transform var(--duration-fast) var(--ease-out);
+  }
+
+  :global(.dark) .about-link {
+    background: rgba(10, 10, 10, 0.55);
+    border-color: var(--ink-20);
+  }
+
+  .about-link:hover {
+    border-color: rgba(0, 51, 160, 0.35);
+    background: rgba(0, 51, 160, 0.06);
+    transform: translateY(-1px);
+  }
+
+  .about-link-icon {
+    width: 18px;
+    height: 18px;
+    opacity: 0.8;
+  }
+
+  .about-main {
+    display: grid;
+    gap: var(--space-12);
+  }
+
+  .about-title {
+    font-family: var(--font-serif);
+    font-size: var(--text-4xl);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  .about-bio {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .about-lead {
+    font-size: var(--text-lg);
+    line-height: 1.75;
+    color: var(--ink-60);
+  }
+
+  .about-body {
+    font-size: var(--text-base);
+    line-height: 1.8;
+    color: var(--ink-80);
+    max-width: 70ch;
+  }
+
+  .about-section-title {
+    font-family: var(--font-serif);
+    font-size: var(--text-2xl);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-4);
+  }
+
+  .about-competencies {
+    border-top: 1px solid var(--ink-10);
+    padding-top: var(--space-10);
+  }
+
+  .about-competency {
+    display: grid;
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+  }
+
+  .about-competency-title {
+    font-size: var(--text-sm);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-60);
+  }
+
+  .about-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .about-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-2) var(--space-3);
+    border-radius: 9999px;
+    background: var(--ink-10);
+    border: 1px solid transparent;
+    color: var(--ink-80);
+    font-size: var(--text-sm);
+    line-height: 1.4;
+    transition: border-color var(--duration-fast) var(--ease-out),
+      background var(--duration-fast) var(--ease-out);
+  }
+
+  .about-chip:hover {
+    border-color: var(--cern-blue);
+    background: rgba(0, 51, 160, 0.06);
+  }
+
+  :global(.dark) .about-chip {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--ink-80);
+  }
+
+  :global(.dark) .about-chip:hover {
+    border-color: var(--cern-blue);
+    background: rgba(51, 102, 204, 0.12);
+  }
+
+  @media (min-width: 768px) {
+    .about-grid {
+      grid-template-columns: 360px 1fr;
+      gap: var(--space-16);
+    }
+
+    .about-photo {
+      border-radius: 14px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .about-page {
+      padding: calc(var(--header-height) + var(--space-20)) 0 var(--space-32);
+    }
+  }
+</style>
