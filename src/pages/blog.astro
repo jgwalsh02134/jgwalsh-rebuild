@@ -236,6 +236,16 @@ const featuredPost = posts[0];
     gap: var(--space-3);
   }
 
+  @media (max-width: 480px) {
+    .blog-filters {
+      flex-direction: column;
+    }
+
+    .blog-filter-btn {
+      width: 100%;
+    }
+  }
+
   .blog-filter-btn {
     min-height: 44px;
     padding: var(--space-2) var(--space-4);
