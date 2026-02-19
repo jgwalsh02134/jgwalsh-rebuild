@@ -42,46 +42,6 @@ import Footer from "../components/Footer.astro";
             <p class="about-body">Applies psychological insight, analytical methods, data literacy, and hands-on experience in applied clinical psychology to enhance resilience, assess risks, and optimize operations across public and private sectors. Proven in collaborative teams; seeking roles in analysis, security, or related fields with a foundation in psychology and discipline.</p>
           </section>
 
-          <section class="about-competencies fade-in stagger-3" aria-labelledby="competencies-title">
-            <h2 id="competencies-title" class="about-section-title">Competencies</h2>
-
-            <div class="about-competency">
-              <h3 class="about-competency-title">Behavioral & Intervention</h3>
-              <ul class="about-chips" aria-label="Behavioral & Intervention">
-                <li><span class="about-chip">Crisis de-escalation and suicide prevention</span></li>
-                <li><span class="about-chip">Group facilitation (CBT/DBT), therapeutic rapport building</span></li>
-                <li><span class="about-chip">Pattern recognition for behavioral triggers and psychosocial factors</span></li>
-                <li><span class="about-chip">Structured interviewing to identify motivations and risks</span></li>
-              </ul>
-            </div>
-
-            <div class="about-competency">
-              <h3 class="about-competency-title">Analytical & Data</h3>
-              <ul class="about-chips" aria-label="Analytical & Data">
-                <li><span class="about-chip">SPSS, R, Excel; working knowledge of Python</span></li>
-                <li><span class="about-chip">Data interpretation for evidence-based conclusions</span></li>
-                <li><span class="about-chip">Hypothesis testing and methodological integrity in research</span></li>
-              </ul>
-            </div>
-
-            <div class="about-competency">
-              <h3 class="about-competency-title">Technical</h3>
-              <ul class="about-chips" aria-label="Technical">
-                <li><span class="about-chip">HTML and Tailwind CSS for platform development</span></li>
-                <li><span class="about-chip">Digital behavior analysis and threat environment profiling</span></li>
-              </ul>
-            </div>
-
-            <div class="about-competency">
-              <h3 class="about-competency-title">Interpersonal & Operational</h3>
-              <ul class="about-chips" aria-label="Interpersonal & Operational">
-                <li><span class="about-chip">Clinical documentation and care coordination</span></li>
-                <li><span class="about-chip">Interdisciplinary collaboration with medical and administrative teams</span></li>
-                <li><span class="about-chip">Team-based discipline from competitive rugby background</span></li>
-                <li><span class="about-chip">Confidentiality handling (e.g., HIPAA compliance)</span></li>
-              </ul>
-            </div>
-          </section>
         </div>
       </div>
     </div>
@@ -196,60 +156,6 @@ import Footer from "../components/Footer.astro";
     margin-bottom: var(--space-4);
   }
 
-  .about-competencies {
-    border-top: 1px solid var(--ink-10);
-    padding-top: var(--space-10);
-  }
-
-  .about-competency {
-    display: grid;
-    gap: var(--space-4);
-    margin-top: var(--space-8);
-  }
-
-  .about-competency-title {
-    font-size: var(--text-sm);
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink-60);
-  }
-
-  .about-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2);
-  }
-
-  .about-chip {
-    display: inline-flex;
-    align-items: center;
-    padding: var(--space-2) var(--space-3);
-    border-radius: 9999px;
-    background: var(--ink-10);
-    border: 1px solid transparent;
-    color: var(--ink-80);
-    font-size: var(--text-sm);
-    line-height: 1.4;
-    transition: border-color var(--duration-fast) var(--ease-out),
-      background var(--duration-fast) var(--ease-out);
-  }
-
-  .about-chip:hover {
-    border-color: var(--cern-blue);
-    background: rgba(0, 51, 160, 0.06);
-    transform: translateY(-1px);
-  }
-
-  :global(.dark) .about-chip {
-    background: rgba(255, 255, 255, 0.06);
-    color: var(--ink-80);
-  }
-
-  :global(.dark) .about-chip:hover {
-    border-color: var(--cern-blue);
-    background: rgba(51, 102, 204, 0.12);
-  }
 
   @media (min-width: 768px) {
     .about-grid {
