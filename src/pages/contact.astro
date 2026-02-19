@@ -252,6 +252,13 @@ import Footer from "../components/Footer.astro";
     -webkit-backdrop-filter: blur(12px);
   }
 
+  @media (max-width: 380px) {
+    .contact-card {
+      padding: var(--space-6);
+      gap: var(--space-6);
+    }
+  }
+
   :global(.dark) .contact-card {
     background: rgba(10, 10, 10, 0.55);
     border-color: rgba(255, 255, 255, 0.10);

@@ -436,6 +436,12 @@ ul, ol {
   z-index: 999;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .mobile-nav {
+    transition: none;
+  }
+}
+
 .mobile-nav.is-open {
   transform: translateY(0);
   opacity: 1;
@@ -498,6 +504,12 @@ ul, ol {
   -webkit-mask-image: radial-gradient(ellipse at 50% 50%, black 30%, transparent 70%);
 }
 
+@media (max-width: 640px) {
+  .hero::before {
+    opacity: 0.25;
+  }
+}
+
 /* Accent Element */
 .hero::after {
   content: '';
@@ -541,6 +553,9 @@ ul, ol {
   border-radius: 9999px;
   background: rgba(0, 51, 160, 0.06);
   border: 1px solid rgba(0, 51, 160, 0.14);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .hero-eyebrow::before {
@@ -992,9 +1007,10 @@ ul, ol {
 }
 
 .footer-icon {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   opacity: 0.7;
+  flex-shrink: 0;
 }
 
 .footer-location {

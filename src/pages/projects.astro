@@ -324,6 +324,7 @@ const projects: Project[] = [
     transition:
       opacity var(--duration-fast) var(--ease-out),
       transform var(--duration-fast) var(--ease-out);
+    will-change: opacity, transform;
   }
 
   .project-item.is-out {
