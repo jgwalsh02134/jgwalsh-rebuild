@@ -53,8 +53,8 @@ const { title, description, tags, category, image, link } = Astro.props;
   }
 
   .project-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
     border-color: rgba(0, 51, 160, 0.28);
     background: rgba(0, 51, 160, 0.04);
   }
@@ -91,6 +91,13 @@ const { title, description, tags, category, image, link } = Astro.props;
     display: grid;
     gap: var(--space-3);
     align-content: start;
+  }
+
+  @media (min-width: 768px) {
+    .project-card__body {
+      padding: var(--space-8);
+      gap: var(--space-4);
+    }
   }
 
   .project-card__title {
