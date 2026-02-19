@@ -238,6 +238,7 @@ import Footer from "../components/Footer.astro";
   .about-chip:hover {
     border-color: var(--cern-blue);
     background: rgba(0, 51, 160, 0.06);
+    transform: translateY(-1px);
   }
 
   :global(.dark) .about-chip {
@@ -264,6 +265,10 @@ import Footer from "../components/Footer.astro";
   @media (min-width: 1024px) {
     .about-page {
       padding: calc(var(--header-height) + var(--space-20)) 0 var(--space-32);
+    }
+
+    .about-grid {
+      gap: var(--space-20);
     }
   }
 </style>

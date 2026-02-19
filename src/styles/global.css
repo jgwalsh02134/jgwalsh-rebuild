@@ -200,6 +200,12 @@ ul, ol {
   }
 }
 
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 var(--space-16);
+  }
+}
+
 /* ═══════════════════════════════════════════════════════════════
    GENERIC PAGE LAYOUT PRIMITIVES (non-home pages)
    ═══════════════════════════════════════════════════════════════ */
@@ -208,8 +214,14 @@ ul, ol {
   padding: calc(var(--header-height) + var(--space-16)) 0 var(--space-20);
 }
 
+@media (min-width: 768px) {
+  .page-section {
+    padding: calc(var(--header-height) + var(--space-20)) 0 var(--space-32);
+  }
+}
+
 .page-inner {
-  max-width: 72ch;
+  max-width: 70ch;
 }
 
 .page-title {
@@ -329,6 +341,7 @@ ul, ol {
 .nav-link:hover {
   color: var(--ink);
   background: var(--ink-10);
+  transform: translateY(-1px);
 }
 
 .nav-link[aria-current="page"] {
@@ -662,7 +675,7 @@ ul, ol {
 .btn-primary:hover {
   background: var(--cern-blue-dark);
   box-shadow: 0 4px 16px rgba(0, 51, 160, 0.35);
-  transform: translateY(-1px);
+  transform: translateY(-2px) scale(1.02);
 }
 
 .btn-secondary {
@@ -674,6 +687,8 @@ ul, ol {
 .btn-secondary:hover {
   border-color: var(--ink-40);
   background: var(--ink-10);
+  transform: scale(1.02);
+  transition-duration: var(--duration-fast);
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -686,10 +701,22 @@ ul, ol {
   position: relative;
 }
 
+@media (min-width: 1024px) {
+  .section-core {
+    padding: var(--space-32) 0;
+  }
+}
+
 .section-header {
   text-align: center;
   max-width: 700px;
   margin: 0 auto var(--space-16);
+}
+
+@media (min-width: 1024px) {
+  .section-header {
+    margin-bottom: var(--space-20);
+  }
 }
 
 .section-eyebrow {
@@ -740,6 +767,12 @@ ul, ol {
   transition: all var(--duration-normal) var(--ease-out);
 }
 
+@media (min-width: 1024px) {
+  .card {
+    padding: var(--space-10);
+  }
+}
+
 .card::before {
   content: '';
   position: absolute;
@@ -755,8 +788,8 @@ ul, ol {
 
 .card:hover {
   border-color: var(--ink-20);
-  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.08);
-  transform: translateY(-2px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
 }
 
 .card:hover::before {
@@ -837,6 +870,12 @@ ul, ol {
   padding: var(--space-20) 0;
   background: var(--paper);
   border-top: 1px solid var(--ink-10);
+}
+
+@media (min-width: 1024px) {
+  .section-trust {
+    padding: var(--space-32) 0;
+  }
 }
 
 .trust-container {
@@ -941,6 +980,12 @@ ul, ol {
   padding: var(--space-16) 0 var(--space-8);
 }
 
+@media (min-width: 1024px) {
+  .site-footer {
+    padding: var(--space-20) 0 var(--space-12);
+  }
+}
+
 .dark .site-footer {
   background: #050505;
 }
@@ -956,6 +1001,12 @@ ul, ol {
   .footer-grid {
     grid-template-columns: 2fr 1fr 1fr 1fr;
     gap: var(--space-12);
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer-grid {
+    gap: var(--space-16);
   }
 }
 
@@ -1002,11 +1053,12 @@ ul, ol {
   gap: var(--space-2);
   font-size: var(--text-sm);
   color: rgba(255, 255, 255, 0.7);
-  transition: color var(--duration-fast) var(--ease-out);
+  transition: all var(--duration-fast) var(--ease-out);
 }
 
 .footer-link:hover {
   color: white;
+  transform: translateX(2px);
 }
 
 .footer-icon {
