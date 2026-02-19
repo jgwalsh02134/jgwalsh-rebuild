@@ -1017,15 +1017,28 @@ ul, ol {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-10);
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-8) var(--space-6);
   margin-bottom: var(--space-12);
+}
+
+.footer-brand {
+  grid-column: 1 / -1;
+}
+
+.footer-col:last-child {
+  grid-column: 1 / -1;
 }
 
 @media (min-width: 768px) {
   .footer-grid {
     grid-template-columns: 2fr 1fr 1fr 1fr;
     gap: var(--space-12);
+  }
+
+  .footer-brand,
+  .footer-col:last-child {
+    grid-column: auto;
   }
 }
 
@@ -1062,14 +1075,14 @@ ul, ol {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: rgba(255, 255, 255, 0.4);
-  margin-bottom: var(--space-5);
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: var(--space-4);
 }
 
 .footer-menu {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-1);
 }
 
 .footer-link {
@@ -1078,12 +1091,31 @@ ul, ol {
   gap: var(--space-2);
   font-size: var(--text-sm);
   color: rgba(255, 255, 255, 0.7);
-  transition: all var(--duration-fast) var(--ease-out);
+  padding: var(--space-1) var(--space-2);
+  margin: 0 calc(-1 * var(--space-2));
+  border-radius: var(--radius-sm);
+  min-height: 36px;
+  transition: color var(--duration-fast) var(--ease-out),
+    background var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+@media (max-width: 767px) {
+  .footer-link {
+    min-height: 44px;
+  }
 }
 
 .footer-link:hover {
   color: white;
+  background: rgba(255, 255, 255, 0.06);
   transform: translateX(2px);
+}
+
+.footer-link:focus-visible {
+  outline: 2px solid var(--cern-blue);
+  outline-offset: 2px;
+  color: white;
 }
 
 .footer-icon {
@@ -1091,6 +1123,11 @@ ul, ol {
   height: 18px;
   opacity: 0.7;
   flex-shrink: 0;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.footer-link:hover .footer-icon {
+  opacity: 1;
 }
 
 .footer-location {
@@ -1103,10 +1140,10 @@ ul, ol {
 
 .footer-bottom {
   padding-top: var(--space-8);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: var(--space-1);
   text-align: center;
 }
 
