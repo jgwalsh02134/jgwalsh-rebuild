@@ -61,6 +61,11 @@
   --content-width: 960px;
   --header-height: 72px;
 
+  /* Responsive header height for small viewports/landscape */
+  @media (max-height: 500px) {
+    --header-height: 56px;
+  }
+
   /* Transitions */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
@@ -139,8 +144,8 @@ button {
 a:focus-visible,
 button:focus-visible,
 [role="button"]:focus-visible {
-  outline: 3px solid rgba(0, 51, 160, 0.35);
-  outline-offset: 3px;
+  outline: 3px solid var(--cern-blue);
+  outline-offset: 2px;
   border-radius: 8px;
 }
 
@@ -309,7 +314,9 @@ ul, ol {
 }
 
 .nav-link {
-  display: block;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
   padding: var(--space-2) var(--space-4);
   font-size: var(--text-sm);
   font-weight: 500;
@@ -349,8 +356,8 @@ ul, ol {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 8px;
   color: var(--ink-60);
   transition: all var(--duration-fast) var(--ease-out);
@@ -504,6 +511,13 @@ ul, ol {
   border-radius: 50%;
   filter: blur(80px);
   pointer-events: none;
+}
+
+@media (max-width: 480px) {
+  .hero::after {
+    width: 400px;
+    height: 400px;
+  }
 }
 
 .hero-content {
